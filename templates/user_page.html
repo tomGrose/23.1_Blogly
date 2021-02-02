@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Users Profile{% endblock%}
+
+{% block header %}User Profile{% endblock %}
+
+{% block content %}
+<div id="profile-container">
+    <div class="profile-info">
+        <img src="{{user.image_url}}" alt="User's Profile Picture">
+    </div>
+    <div class="profile-info">
+        <h3>{{user.first_name}} {{user.last_name}}</h3>
+        <div>
+            <form>
+                <button formaction="/users/{{user.id}}/edit" formmethod="GET">Edit</button>
+                <button formaction="/users/{{user.id}}/delete" formmethod="POST">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
