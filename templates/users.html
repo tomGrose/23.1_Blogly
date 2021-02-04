@@ -5,11 +5,13 @@
 {% block header %}Users{% endblock %}
 
 {% block content %}
-{% for u in users %}
+<div class="list">
     <ul>
-        <li><a href="/users/{{u.id}}">{{u.first_name}} {{u.last_name}}</a></li>
+        {% for u in users %}
+            <li><a href="/users/{{u.id}}">{{u.first_name}} {{u.last_name}}</a></li>
+        {% endfor  %}
     </ul>
-    <div class="{{category}}"><p>{{msg}}</p></div>
-{% endfor  %}
-<a href="/users/new"><button> Add a new user</button></a>
+    <a href="/users/new"><button class="main-btn"> Add a new user</button></a>
+</div>
+
 {% endblock %}

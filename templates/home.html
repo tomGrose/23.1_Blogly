@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Blogly Home{% endblock%}
+
+{% block header %}Newest Posts{% endblock %}
+
+{% block content %}
+<div class="list">
+    <ul class="list">
+        {% for p in posts %}
+            <li><a href="/posts/{{p.id}}">{{p.title}}</a></li>
+        {% endfor  %}
+    </ul>
+    <a href="/users"><button class="main-btn"> See Users </button></a>
+</div>
+
+{% endblock %}

@@ -1,12 +1,12 @@
 from unittest import TestCase
 
 from app import app
-from models import db, User
+from models import db, User, Post
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///users_test'
-app.config['SQLALCHEMY_ECHO'] = False
+app.config['SQLALCHEMY_ECHO'] = True
 
-app.config['TESTING'] = True
+app.config['TESTING'] = False
 
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 
@@ -19,14 +19,25 @@ class UsersViewsTestCase(TestCase):
 
     def setUp(self):
         """Add sample user."""
-
+        Post.query.delete()
         User.query.delete()
+        
 
         user = User(first_name="TestTom", last_name="Smith")
+        
         db.session.add(user)
         db.session.commit()
 
-        self.user_id = user.id
+        self.user_id = user.id 
+
+        post = Post(title="TestTitle", content="Testing test testing", user_id=user.id)
+
+        db.session.add(post)
+        db.session.commit()
+
+        
+        self.post_id = post.id
+
 
     def tearDown(self):
         """Clean up any fouled transaction."""
@@ -66,3 +77,21 @@ class UsersViewsTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn("TestTommy", html)
+
+    def test_view_post(self):
+        with app.test_client() as client:
+            resp = client.get(f"/posts/{self.post_id}")
+            html = resp.get_data(as_text=True)
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("TestTitle", html)
+
+    def test_add_post(self):
+        with app.test_client() as client:
+            d = {"title": "TestPostTest2", "content": "Testing adding a post"}
+            resp = client.post(f"/users/{self.user_id}/posts/new", data=d, follow_redirects=True)
+            html = resp.get_data(as_text=True)
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("TestPostTest2", html)
+

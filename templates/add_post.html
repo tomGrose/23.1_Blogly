@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Post{% endblock%}
+
+{% block header %}Add a Post!{% endblock %}
+
+{% block content %}
+<form class="add-form">
+    <div class="input-container">
+        <label for="title">Post Title</label>
+        <input type="text" name="title">
+    </div>
+    <div class="input-container">
+        <label for="content">Post Content</label>
+        <textarea name="content" id="post-content" cols="30" rows="10"></textarea>
+    </div>
+    <div class="input-container">
+        <button formaction="/users/{{user.id}}">Cancel</button>
+        <button formaction="/users/{{user.id}}/posts/new" formmethod="POST">Submit</button>
+    </div>
+</form>
+
+{% endblock %}
