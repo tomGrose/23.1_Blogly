@@ -2,7 +2,7 @@
 
 {% block title %}User's Post{% endblock%}
 
-{% block header %}{{user.first_name}} Post{% endblock %}
+{% block header %}{{user.first_name}}'s Post{% endblock %}
 
 {% block content %}
 <div id="post-container">
@@ -10,6 +10,12 @@
         <h2>{{post.title}}</h2>
         <p>{{post.content}}</p>
         <p>Posted: {{post.created_at}}</p>
+        <div class="tags-container">
+            <p>Tags</p>
+            {% for t in tags %}
+                <div class="tags"><a href="/tags/{{t.id}}"><p>{{t.name}}</p></a></div>
+            {% endfor  %}
+        </div>
         <div>
             <form>
                 <button formaction="/posts/{{post.id}}/edit" formmethod="GET">Edit</button>

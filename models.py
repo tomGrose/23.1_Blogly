@@ -19,7 +19,7 @@ class User(db.Model):
 
     def __repr__(self):
         """ Show info about user"""
-        return f"<User {self.first_name} {self.last_name}"
+        return f"<User {self.first_name} {self.last_name}>"
 
     
 
@@ -49,12 +49,12 @@ class Post(db.Model):
 
     def __repr__(self):
         """ Show info about a user's post"""
-        return f"<User {self.title} created by {self.user_id}>"
+        return f"<Title: {self.title} created by {self.user_id}>"
 
     id = db.Column(db.Integer,
                    primary_key=True,
                    autoincrement=True)
-    title = db.Column(db.String(20),
+    title = db.Column(db.String(40),
                      nullable=False)
     content = db.Column(db.String(300),
                      nullable=False)
@@ -70,5 +70,39 @@ class Post(db.Model):
 
     user = db.relationship( 'User', backref='posts')
 
+class Tag(db.Model):
+    """Tag."""
+
+    __tablename__ = "tags"
+
+    def __repr__(self):
+        """ Show info about a tag"""
+        return f"<Tag name: {self.name}>"
+
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    name = db.Column(db.String(20),
+                     nullable=False,
+                     unique=True)
+    
+
+    posts = db.relationship('Post', secondary='post_tags', backref='tags')
 
 
+class PostTag(db.Model):
+    """PostTag."""
+
+    __tablename__ = "post_tags"
+
+    def __repr__(self):
+        """ Show info for posts thaat were tagged"""
+        return f"<Post id: {self.post_id}, Tag id: {self.tag_id}>"
+
+    post_id = db.Column(db.Integer,
+                    db.ForeignKey("posts.id"),
+                    primary_key=True)
+    tag_id = db.Column(db.Integer,
+                    db.ForeignKey("tags.id"),
+                    primary_key=True)
+    

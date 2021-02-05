@@ -1,3 +1,26 @@
+ul {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+}
+h2 {
+    font-size: 1.8rem;
+}
+h3 {
+    font-size: 1.5rem;
+}
+h4 {
+    font-size: 1.3rem;
+}
+
+a:hover {
+    color: lightskyblue;
+}
+#home-tags {
+    display: flex;
+}
+
 #profile-container {
     display: flex;
     width: 75%;
@@ -10,7 +33,7 @@
     width: 50%;
 }
 
-.list {
+.list-container {
     width: 75%;
     margin: auto;
 }
@@ -41,4 +64,41 @@
 .main-btn {
     display: block;
     margin: 3% auto;
+}
+
+.post-title-home {
+    font-size: 1.6rem;
+}
+.tags {
+    color: white;
+    padding: 0px 1%;
+    margin: 0px 2%;
+}
+
+.tags a p {
+    color: white;
+    background-color: blue;
+    padding: 3px;
+    border-radius: 8px;
+}
+
+.main-btn {
+    border-radius: 3px;
+    border: 1px solid grey;
+    background-color: lightblue;
+}
+
+.list {
+    background-color: #f2f2f2;
+    padding: 2%;
+
+}
+
+.list li {
+    margin: 2% 0px;
+    font-size: 1.5rem;
+}
+
+.tags-container {
+    display: flex;
 }

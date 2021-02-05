@@ -5,8 +5,8 @@
 {% block header %}Users{% endblock %}
 
 {% block content %}
-<div class="list">
-    <ul>
+<div id="users-list" class="list-container">
+    <ul class="list">
         {% for u in users %}
             <li><a href="/users/{{u.id}}">{{u.first_name}} {{u.last_name}}</a></li>
         {% endfor  %}

@@ -5,10 +5,19 @@
 {% block header %}Newest Posts{% endblock %}
 
 {% block content %}
-<div class="list">
-    <ul class="list">
+<div class="list-container">
+    <ul>
+        <hr>
         {% for p in posts %}
-            <li><a href="/posts/{{p.id}}">{{p.title}}</a></li>
+            <li><a href="/posts/{{p.id}}"><h3 class="post-title-home">{{p.title}}</h3></a></li>
+            <p>{{p.content}}</p>
+            <div class="tags-container">
+                <p>Tags</p>
+                {% for t in p.tags %}
+                    <div class="tags"><a href="/tags/{{t.id}}"><p>{{t.name}}</p></a></div>
+                {% endfor  %}
+            </div>
+            <hr>
         {% endfor  %}
     </ul>
     <a href="/users"><button class="main-btn"> See Users </button></a>
