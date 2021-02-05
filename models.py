@@ -33,7 +33,8 @@ class User(db.Model):
     image_url = db.Column(db.String(100), nullable=True,
                             default="http://www.newdesignfile.com/postpic/2014/07/generic-user-icon-windows_352871.png")
 
-    
+    post = db.relationship("Post", cascade="all, delete-orphan")
+
     def update_info(self, first_name, last_name, image_url):
         """Update a users info"""
         self.first_name = first_name
